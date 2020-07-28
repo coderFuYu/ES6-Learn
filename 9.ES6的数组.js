@@ -168,9 +168,112 @@
 // console.log([1, 2, 3].flatMap(n => [n * 2])); // [2, 4, 6]
 
 
-let buffer = new ArrayBuffer(10);
-console.log(buffer.byteLength); // 10
-// 分割已有数组缓冲区
-let buffer = new ArrayBuffer(10);
-let buffer1 = buffer.slice(1, 3);
-console.log(buffer1.byteLength); // 2
+// let buffer = new ArrayBuffer(10);
+// console.log(buffer.byteLength); // 10
+// // 分割已有数组缓冲区
+// let buffer = new ArrayBuffer(10);
+// let buffer1 = buffer.slice(1, 3);
+// console.log(buffer1.byteLength); // 2
+
+
+// // 默认 DataView 可操作数组缓冲区全部内容
+// let buffer = new ArrayBuffer(10);
+// dataView = new DataView(buffer);
+// dataView.setInt8(0,1);
+// console.log(dataView.getInt8(0)); // 1
+//
+// // 通过设定偏移量(参数2)与长度(参数3)指定 DataView 可操作的字节范围
+// let buffer1 = new ArrayBuffer(10);
+// dataView1 = new DataView(buffer1, 0, 3);
+// dataView1.setInt8(5,1); // RangeError
+
+
+// let buffer = new ArrayBuffer(10),
+//     view = new Int8Array(buffer);
+// console.log(view.byteLength); // 10
+
+
+// let view = new Int32Array(10);
+// console.log(view.byteLength); // 40
+// console.log(view.length);     // 10
+//
+// // 不传参则默认长度为0
+// // 在这种情况下数组缓冲区分配不到空间，创建的定型数组不能用来保存数据
+// let view1 = new Int32Array();
+// console.log(view1.byteLength); // 0
+// console.log(view1.length);     // 0
+//
+// // 可接受参数包括定型数组、可迭代对象、数组、类数组对象
+// let arr = Array.from({
+//   0: '1',
+//   1: '2',
+//   2: 3,
+//   length: 3
+// });
+// let view2 = new Int16Array([1, 2]),
+//     view3 = new Int32Array(view2),
+//     view4 = new Int16Array(new Set([1, 2, 3])),
+//     view5 = new Int16Array([1, 2, 3]),
+//     view6 = new Int16Array(arr);
+// console.log(view2 .buffer === view3.buffer); // false
+// console.log(view4.byteLength); // 6
+// console.log(view5.byteLength); // 6
+// console.log(view6.byteLength); // 6
+
+
+// let view = new Int16Array([1, 2]);
+// view.length = 3;
+// console.log(view.length); // 2
+
+
+// let view = new Int16Array([1, 2]);
+// for(let [k, v] of view.entries()){
+//   console.log(k, v);
+// }
+// // 0 1
+// // 1 2
+
+
+// let view = new Int16Array([1, 2]);
+// view.find((n) > 1); // 2
+
+
+// let view = Int16Array.of(1, 2);
+// console.log(view instanceof Int16Array); // true
+
+
+// let view = new Int16Array([1, 2]);
+// console.log(Array.isArray(view)); // false
+
+
+// // set 方法
+// // 参数1：一个定型数组或普通数组
+// // 参数2：可选，偏移量，开始插入数据的位置，默认为0
+// let view= new Int16Array(4);
+// view.set([1, 2]);
+// view.set([3, 4], 2);
+// console.log(view); // [1, 2, 3, 4]
+//
+// // subarray 方法
+// // 参数1：可选，开始位置
+// // 参数2：可选，结束位置(不包含结束位置)
+// let view= new Int16Array([1, 2, 3, 4]),
+//     subview1 = view.subarray(),
+//     subview2 = view.subarray(1),
+//     subview3 = view.subarray(1, 3);
+// console.log(subview1); // [1, 2, 3, 4]
+// console.log(subview2); // [2, 3, 4]
+// console.log(subview3); // [2, 3]
+
+
+// let arr = [1, 2],
+//     arr1 = [...arr];
+// console.log(arr1); // [1, 2]
+//
+// // 数组含空位
+// let arr2 = [1, , 3],
+//     arr3 = [...arr2];
+// console.log(arr3); [1, undefined, 3]
+
+
+// console.log([...[1, 2],...[3, 4]]); // [1, 2, 3, 4]
